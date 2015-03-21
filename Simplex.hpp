@@ -82,7 +82,7 @@ class Simplex
         float sum = 0.0f;
         for(size_t k = 0; k != con.size(); ++k)
         {
-            float t = dist(rgen);
+            float t = dist(rgen); // uniform float in [0...1) range
             if (t == 0.0f)
             {
                 make_degenerate_sample(con, k);
