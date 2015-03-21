@@ -57,19 +57,19 @@ class Simplex
 #pragma region Sampling
     private: void make_degenerate_sample(container_type& con, int n) const
     {
-        for(size_t k = 0; k != con.size(); ++k)
+        for(auto& v: con)
         {
-            con[k] = 0.0f;
+            v = 0.0f;
         }
         con[n] = 1.0f;
     }
     
     private: void scale_and_shift(container_type& con, float sum) const
     {
-        float norm  = 1.0f / sum;
-        for(auto i = con.begin(); i != con.end(); ++i)
+        float norm  = ( 1.0f / sum ) * _d;
+        for(auto& v: con)
         {
-            *i = _a + (*i) * norm * _d;
+            v = _a + v * norm; // norm already have interval inclduded
         }
     }
 
@@ -87,14 +87,13 @@ class Simplex
             {
                 make_degenerate_sample(con, k);
                 sum = 1.0f;
-                goto scaling;
+                break;
             }
             t = -log(t);
             con[k] = t;
             sum   += t;
         }
         
-    scaling:
         scale_and_shift(con, sum);
     }
 #pragma endregion
