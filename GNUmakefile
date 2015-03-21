@@ -50,7 +50,7 @@ DEFS  :=
 # object files - done by string substitution
 #
 
-SRCS_SIMPLEX := main.cpp
+SRCS_SIMPLEX := main.cpp Simplex.cpp
 OBJS_SIMPLEX := $(addsuffix .o, $(basename $(SRCS_SIMPLEX)))	
 DEPS_SIMPLEX := $(addsuffix .d, $(basename $(SRCS_SIMPLEX)))
 
